@@ -4,23 +4,24 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-
-
     <Button
         android:id="@+id/presentation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:text="@string/presentation_button" />
-     <Button
+
+    <Button
         android:id="@+id/exif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/exif_button" />
-      <Button
+
+    <Button
         android:id="@+id/preferences"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:text="@string/options_button" />
-        
 
 </LinearLayout>
