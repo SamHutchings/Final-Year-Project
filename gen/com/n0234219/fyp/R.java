@@ -14,12 +14,12 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int exif=0x7f050001;
+        public static final int exif=0x7f050000;
         public static final int mapview=0x7f050003;
         public static final int photo_fragment=0x7f050004;
         public static final int photo_item=0x7f050005;
         public static final int preferences=0x7f050002;
-        public static final int presentation=0x7f050000;
+        public static final int presentation=0x7f050001;
     }
     public static final class layout {
         public static final int mainmenu=0x7f030000;
