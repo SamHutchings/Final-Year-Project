@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <fragment
+        android:id="@+id/thumbnail_fragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="55"
+        android:name="com.n0234219.fyp.ThumbnailViewFragment" >
+    </fragment>
+       
+       
+       <View 
+        android:layout_width="1dp"
+        android:layout_height="fill_parent"
+        android:background="#ff000000"
+        />
+       
+    <fragment
+        android:name="com.n0234219.fyp.MapViewFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:id="@+id/mapview_fragment"
+        android:layout_weight="35">
+    </fragment>
+</LinearLayout>
