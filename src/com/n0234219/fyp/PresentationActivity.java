@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 public class PresentationActivity extends Activity {
 
-	private String fileName;
+	private String filePath;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,7 @@ public class PresentationActivity extends Activity {
 			startActivity(showContent);	
 
 		} else {
-			
+			viewer.updateImage(filePath);
 		}
 
 	}
