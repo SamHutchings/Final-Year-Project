@@ -13,6 +13,7 @@ import android.widget.TextView;
 public class PresentationMenuActivity extends Activity {
 
 	private ArrayList<Uri> selectedImages;
+	private TextView fileChoiceText;
 	private Uri mImageCaptureUri = null;
 	private static final int PICK_FROM_FILE = 2;
 
@@ -41,7 +42,7 @@ public class PresentationMenuActivity extends Activity {
 				}
 			}
 		});
-		final TextView fileChoiceText = (TextView) findViewById(R.id.filechoicetext);
+		fileChoiceText = (TextView) findViewById(R.id.filechoicetext);
 	}
 
 	@Override
@@ -49,9 +50,12 @@ public class PresentationMenuActivity extends Activity {
 		if (resultCode != RESULT_OK) return;
 
 		if (requestCode == PICK_FROM_FILE) {
-			mImageCaptureUri = data.getData();
+			if(!data.getData().equals(null)) {
+				mImageCaptureUri = data.getData();
+				fileChoiceText.setText(mImageCaptureUri.toString() + " selected.");
+
+			}
 
 		}
-
 	}
 }

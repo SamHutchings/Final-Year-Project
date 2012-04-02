@@ -7,9 +7,4 @@ public class PhotoInfo {
 	private double longitude;
 	private String location;
 	private Time timeTaken;
-	
-	
-	
-	
-	
 }
