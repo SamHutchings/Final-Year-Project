@@ -6,24 +6,26 @@ import android.os.Bundle;
 
 public class PresentationActivity extends Activity {
 
-	private String filePath;
+	private PhotoInfo info;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.presentation);
+		
+		Bundle extras = getIntent().getExtras();
+		info = (PhotoInfo) extras.getParcelable("Info");
+
+	}
+	
+	public void onStart() {
+		super.onStart();
 		PhotoViewFragment viewer = (PhotoViewFragment) getFragmentManager()
 				.findFragmentById(R.id.photo);
-
-		if (viewer == null || !viewer.isInLayout()) {
-			Intent showContent = new Intent(getApplicationContext(),
-					MapViewActivity.class);
-			
-			startActivity(showContent);	
-
-		} else {
-			viewer.updateImage(filePath);
-		}
-
+		MapViewFragment mapViewer = (MapViewFragment) getFragmentManager()
+				.findFragmentById(R.id.mapview);
+		
+		
+		
 	}
 }

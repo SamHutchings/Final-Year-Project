@@ -1,12 +1,14 @@
 package com.n0234219.fyp;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.format.Time;
 
-public class PhotoInfo {
+public class PhotoInfo implements Parcelable {
 	private Double latitude;
 	private Double longitude;
 	private String location;
-	private Time timeTaken;
+	private Long timeTaken;
 	
 	public Double getLatitude() {
 		return latitude;
@@ -32,12 +34,45 @@ public class PhotoInfo {
 		location = loc;
 	}
 	
-	public Time getTimeTaken() {
+	public long getTimeTaken() {
 		return timeTaken;
 	}
 	
-	public void setTimeTaken(Time time) {
+	public void setTimeTaken(long time) {
 		timeTaken = time;
+	}
+
+	public int describeContents() {
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeDouble(latitude);
+		dest.writeDouble(longitude);
+		dest.writeString(location);
+		dest.writeLong(timeTaken);	
+	}
+	
+	   // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
+    public static final Parcelable.Creator<PhotoInfo> CREATOR = new Parcelable.Creator<PhotoInfo>() {
+        public PhotoInfo createFromParcel(Parcel in) {
+            return new PhotoInfo(in);
+        }
+
+        public PhotoInfo[] newArray(int size) {
+            return new PhotoInfo[size];
+        }
+    };
+
+    // example constructor that takes a Parcel and gives you an object populated with it's values
+    private PhotoInfo(Parcel in) {
+        latitude = in.readDouble();
+        longitude = in.readDouble();
+        location = in.readString();
+        timeTaken = in.readLong();
+    }
+
+	public PhotoInfo() {
 	}
 	
 	
