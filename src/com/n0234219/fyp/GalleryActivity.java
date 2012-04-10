@@ -3,17 +3,19 @@ package com.n0234219.fyp;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
-import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.AdapterView.OnItemClickListener;
+
 
 public class GalleryActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor> {
 	
@@ -38,19 +40,26 @@ public class GalleryActivity extends Activity implements LoaderManager.LoaderCal
 	}
 
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		// TODO Auto-generated method stub
-		return null;
+		String[] projection = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};
+        CursorLoader cursorLoader = new CursorLoader(this,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection,
+                null, null, null);
+        return cursorLoader;
 	}
 
-	public void onLoadFinished(Loader<Cursor> arg0, Cursor arg1) {
-		// TODO Auto-generated method stub
+	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+		adapter.swapCursor(cursor);
 		
 	}
 
-	public void onLoaderReset(Loader<Cursor> arg0) {
-		// TODO Auto-generated method stub
+	public void onLoaderReset(Loader<Cursor> loader) {
+		 adapter.swapCursor(null);
 		
 	}
+	
+	
+		
+	
 	
 	
 	  private class ImageCursorAdapter extends CursorAdapter {
@@ -64,17 +73,18 @@ public class GalleryActivity extends Activity implements LoaderManager.LoaderCal
 
 	        @Override
 	        public void bindView(View view, Context context, Cursor cursor) {
-	            ImageView iv = (ImageView) view;
-	            String id = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Thumbnails._ID));
-	            iv.setImageURI(Uri.withAppendedPath(MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI, "" + id));
+	            ImageView iv = (ImageView) view.findViewById(R.id.photo);
+	            long id = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID));
+	            iv.setImageBitmap(MediaStore.Images.Thumbnails.getThumbnail(
+	                    getApplicationContext().getContentResolver(), id,
+   	                    MediaStore.Images.Thumbnails.MICRO_KIND, null));
 	        }
 
 	        @Override
 	        public View newView(Context context, Cursor cursor, ViewGroup parent) {
-	            ImageView view = new ImageView(mContext);
-	            return view;
-	        }
-	    }
+	        	View v = getLayoutInflater().inflate(R.layout.gallery_item, parent, false);
+	            return v;	        }
+	    	}
 
 
 }

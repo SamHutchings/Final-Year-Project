@@ -29,12 +29,14 @@ public class PresentationMenuActivity extends Activity {
 		final Button fileChoiceButton = (Button) findViewById(R.id.filechoice);
 		fileChoiceButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent();
-
-				intent.setType("image/*");
-				intent.setAction(Intent.ACTION_GET_CONTENT);
-
-				startActivityForResult(Intent.createChooser(intent, "Complete action using"), PICK_FROM_FILE);
+				Intent intent = new Intent(PresentationMenuActivity.this, GalleryActivity.class);
+				PresentationMenuActivity.this.startActivity(intent);
+// Intent myIntent = new Intent(MainMenuActivity.this, PresentationMenuActivity.class);
+           	 
+//				intent.setType("image/*");
+//				intent.setAction(Intent.ACTION_GET_CONTENT);
+//
+//				startActivityForResult(Intent.createChooser(intent, "Complete action using"), PICK_FROM_FILE);
 			}
 		});
 		
