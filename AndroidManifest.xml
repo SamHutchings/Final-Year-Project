@@ -25,6 +25,7 @@
         <activity android:name=".PreferencesMenuActivity" android:label="PreferencesMenu" android:screenOrientation="portrait" />
         <activity android:name=".PresentationMenuActivity" android:label="Presentation" android:screenOrientation="portrait" />
          <activity android:name=".MapViewActivity" android:label="MapView" android:screenOrientation="landscape" />
+         <activity android:name=".GalleryActivity" android:label="Gallery" android:screenOrientation="portrait" />
         
         
     </application>

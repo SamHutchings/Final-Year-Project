@@ -15,18 +15,19 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int exif=0x7f050005;
-        public static final int filechoice=0x7f050009;
-        public static final int filechoicetext=0x7f05000a;
-        public static final int mapview=0x7f050007;
+        public static final int exif=0x7f050006;
+        public static final int filechoice=0x7f05000a;
+        public static final int filechoicetext=0x7f05000b;
+        public static final int gallery=0x7f050004;
+        public static final int mapview=0x7f050008;
         public static final int mapview_fragment=0x7f050001;
-        public static final int photo=0x7f050008;
+        public static final int photo=0x7f050009;
         public static final int photo_grid=0x7f050003;
-        public static final int photo_item=0x7f05000c;
-        public static final int preferences=0x7f050006;
-        public static final int presentation=0x7f050004;
+        public static final int photo_item=0x7f05000d;
+        public static final int preferences=0x7f050007;
+        public static final int presentation=0x7f050005;
         public static final int select_button=0x7f050002;
-        public static final int startpresentation=0x7f05000b;
+        public static final int startpresentation=0x7f05000c;
         public static final int thumbnail_fragment=0x7f050000;
     }
     public static final class layout {
@@ -50,6 +51,7 @@ public final class R {
         public static final int file_choice_label=0x7f040006;
         public static final int options_button=0x7f040003;
         public static final int presentation_button=0x7f040001;
+        public static final int select_button=0x7f040007;
         public static final int start_presentation_button=0x7f040005;
     }
 }
