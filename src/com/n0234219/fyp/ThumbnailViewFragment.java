@@ -1,5 +1,7 @@
 package com.n0234219.fyp;
 
+import java.util.concurrent.ExecutionException;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
@@ -7,7 +9,9 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -86,11 +90,12 @@ public class ThumbnailViewFragment extends Fragment implements LoaderManager.Loa
 
     // Loader manager methods
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        String[] projection = {MediaStore.Images.Thumbnails._ID};
-        CursorLoader cursorLoader = new CursorLoader(getActivity(),
-                MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI, projection,
-                null, null, null);
-        return cursorLoader;
+        String[] projection = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};
+		CursorLoader cursorLoader = new CursorLoader(getActivity(),
+				MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection,
+				 MediaStore.Images.Media.DATA + " like ? ",
+			        new String[] {"%Camera%"}, null);
+		return cursorLoader;
     }
 
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
@@ -101,6 +106,18 @@ public class ThumbnailViewFragment extends Fragment implements LoaderManager.Loa
     public void onLoaderReset(Loader<Cursor> cursor) {
         adapter.swapCursor(null);
     }
+    
+    
+    private class GetThumbnailTask extends AsyncTask<Long, Integer, Bitmap> {
+
+		@Override
+		protected Bitmap doInBackground(Long... params) {
+			return MediaStore.Images.Thumbnails.getThumbnail(getActivity().getApplicationContext().getContentResolver(),
+					params[0], MediaStore.Images.Thumbnails.MICRO_KIND, null);
+		}
+		
+	}
+    
 
     private class ImageCursorAdapter extends CursorAdapter {
 
@@ -114,8 +131,15 @@ public class ThumbnailViewFragment extends Fragment implements LoaderManager.Loa
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
             ImageView iv = (ImageView) view;
-            String id = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Thumbnails._ID));
-            iv.setImageURI(Uri.withAppendedPath(MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI, "" + id));
+			long id = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID));
+			AsyncTask<Long, Integer, Bitmap> task = new GetThumbnailTask().execute(id);
+			try {
+				iv.setImageBitmap(task.get());
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+			}
         }
 
         @Override
