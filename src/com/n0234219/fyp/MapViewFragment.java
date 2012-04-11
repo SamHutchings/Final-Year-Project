@@ -71,7 +71,7 @@ public class MapViewFragment extends LocalActivityManagerFragment {
 		GeoPoint p = new GeoPoint((int) (lat * microDegrees), (int)(lng * microDegrees));
 		MapController mc = mapView.getController();
 		OverlayItem overlayitem = new OverlayItem(p, "Photo Location", "Latitude: " + lat + " \nLongitude: " + lng);
-		Drawable drawable = this.getResources().getDrawable(R.drawable.androidmarker);
+		Drawable drawable = this.getResources().getDrawable(R.drawable.mapspointer);
 		MapOverlay itemizedoverlay = new MapOverlay(drawable, this.getActivity());
 		itemizedoverlay.addOverlay(overlayitem);
 		mapOverlays.clear();
