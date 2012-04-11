@@ -44,37 +44,29 @@ public class ThumbnailViewFragment extends Fragment implements LoaderManager.Loa
 
     @Override
     public void onStart() {
-        super.onStart();
-        adapter = new ImageCursorAdapter(getActivity().getApplicationContext(), c, 0);
-        gridView = (GridView) getView();
-        gridView.setOnItemClickListener(new OnItemClickListener() {
+    	super.onStart();
+    	adapter = new ImageCursorAdapter(getActivity().getApplicationContext(), c, 0);
+    	gridView = (GridView) getView();
+    	gridView.setOnItemClickListener(new OnItemClickListener() {
 
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                    long id) {
-                String projection[] = {MediaStore.Images.Thumbnails.IMAGE_ID};
-                Cursor thumbCursor = getActivity().getContentResolver().query(
-                        Uri.withAppendedPath(MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI,
-                        String.valueOf(id)), projection, null, null, null);
-                if (thumbCursor.moveToFirst()) {
-                    String imageId = thumbCursor.getString(thumbCursor.getColumnIndexOrThrow(MediaStore.Images.Thumbnails.IMAGE_ID));
-                    thumbCursor.close();
-                    String imageProjection[] = {MediaStore.Images.ImageColumns.LATITUDE, MediaStore.Images.ImageColumns.LONGITUDE};
-                    Cursor imageCursor = getActivity().getContentResolver().query(
-                            Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                            imageId), imageProjection, null, null, null);
-                    if (imageCursor.moveToFirst()) {
-                        imageSelectionListener.onImageSelected(imageCursor.getString(imageCursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.LATITUDE)),
-                                imageCursor.getString(imageCursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.LONGITUDE)));
-                    } else {
-                        imageCursor.close();
-                    }
+    		public void onItemClick(AdapterView<?> parent, View view, int position,
+    				long id) {
+    			String projection[] = {MediaStore.Images.ImageColumns.LATITUDE, MediaStore.Images.ImageColumns.LONGITUDE};
+    			Cursor imageCursor = getActivity().getContentResolver().query(
+    					Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+    							String.valueOf(id)), projection, null, null, null);
 
-                } else {
-                    thumbCursor.close();
-                }
-            }
-        });
-        gridView.setAdapter(adapter);
+    			if (imageCursor.moveToFirst()) {
+    				imageSelectionListener.onImageSelected(imageCursor.getString(imageCursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.LATITUDE)),
+    						imageCursor.getString(imageCursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.LONGITUDE)));
+    			} else {
+    				imageCursor.close();
+    			}
+
+
+    		}
+    	});
+    	gridView.setAdapter(adapter);
     }
 
     @Override
