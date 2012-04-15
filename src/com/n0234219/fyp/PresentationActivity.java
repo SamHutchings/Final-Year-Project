@@ -1,12 +1,15 @@
 package com.n0234219.fyp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
 public class PresentationActivity extends Activity {
 
-	private PhotoInfo info;
+	private List<PhotoInfo> info;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -14,7 +17,7 @@ public class PresentationActivity extends Activity {
 		setContentView(R.layout.presentation);
 		
 		Bundle extras = getIntent().getExtras();
-		info = (PhotoInfo) extras.getParcelable("Info");
+		info = extras.getParcelableArrayList("Info");
 
 	}
 	
@@ -24,8 +27,6 @@ public class PresentationActivity extends Activity {
 				.findFragmentById(R.id.photo);
 		MapViewFragment mapViewer = (MapViewFragment) getFragmentManager()
 				.findFragmentById(R.id.mapview);
-		
-		
 		
 	}
 }

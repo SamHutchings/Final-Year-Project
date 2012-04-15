@@ -1,12 +1,14 @@
 package com.n0234219.fyp;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
 import android.view.View;
@@ -18,34 +20,30 @@ public class PresentationMenuActivity extends Activity {
 	private ArrayList<Uri> selectedImages;
 	private TextView fileChoiceText;
 	private Uri mImageCaptureUri = null;
-	private PhotoInfo info = null;
+	private List<PhotoInfo> info;
 	private static final int PICK_FROM_FILE = 1;
+	
 
 	@Override
 	public void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
-		info = new PhotoInfo();
+		info = new ArrayList<PhotoInfo>();
 		setContentView(R.layout.presentation_menu);      
 		final Button fileChoiceButton = (Button) findViewById(R.id.filechoice);
 		fileChoiceButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				Intent intent = new Intent(PresentationMenuActivity.this, GalleryActivity.class);
-				PresentationMenuActivity.this.startActivity(intent);
-// Intent myIntent = new Intent(MainMenuActivity.this, PresentationMenuActivity.class);
-           	 
-//				intent.setType("image/*");
-//				intent.setAction(Intent.ACTION_GET_CONTENT);
-//
-//				startActivityForResult(Intent.createChooser(intent, "Complete action using"), PICK_FROM_FILE);
+				PresentationMenuActivity.this.startActivityForResult(intent, PICK_FROM_FILE);
+
 			}
 		});
 		
 		final Button startPresentationButton = (Button) findViewById(R.id.startpresentation);
 		startPresentationButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				if(null != info.getLocation()) {
+				if(info.size() > 0) {
 					Intent myIntent = new Intent(PresentationMenuActivity.this, PresentationActivity.class);
-					myIntent.putExtra("Info", info);
+					myIntent.putParcelableArrayListExtra("Info",(ArrayList<? extends Parcelable>) info);
 					PresentationMenuActivity.this.startActivity(myIntent);
 				}
 			}
@@ -58,11 +56,10 @@ public class PresentationMenuActivity extends Activity {
 		if (resultCode != RESULT_OK) return;
 
 		if (requestCode == PICK_FROM_FILE) {
-			if(!data.getData().equals(null)) {
-				mImageCaptureUri = data.getData();
-				info = setPhotoInfo(mImageCaptureUri);
-				fileChoiceText.setText(info.getLocation() + " selected.");
-
+			if(!data.getExtras().equals(null)) {
+				Bundle extras = data.getExtras();
+				info = extras.getParcelableArrayList("Info");
+				fileChoiceText.setText(info.size() + " files currently selected");
 			}
 
 		}
