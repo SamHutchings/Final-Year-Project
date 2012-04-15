@@ -57,8 +57,8 @@ public class ThumbnailViewFragment extends Fragment implements LoaderManager.Loa
     							String.valueOf(id)), projection, null, null, null);
 
     			if (imageCursor.moveToFirst()) {
-    				imageSelectionListener.onImageSelected(imageCursor.getString(imageCursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.LATITUDE)),
-    						imageCursor.getString(imageCursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.LONGITUDE)));
+    				imageSelectionListener.onImageSelected(imageCursor.getDouble(imageCursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.LATITUDE)),
+    						imageCursor.getDouble(imageCursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.LONGITUDE)));
     			} else {
     				imageCursor.close();
     			}
@@ -143,6 +143,6 @@ public class ThumbnailViewFragment extends Fragment implements LoaderManager.Loa
 
     public interface OnImageSelectedListener {
 
-        public void onImageSelected(String lat, String lng);
+        public void onImageSelected(Double lat, Double lng);
     }
 }

@@ -6,10 +6,14 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 public class PresentationActivity extends Activity {
 
 	private List<PhotoInfo> info;
+	private MapViewFragment mapFragment;
+	private PhotoViewFragment photoFragment;
+	private ImageView iv;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -23,10 +27,18 @@ public class PresentationActivity extends Activity {
 	
 	public void onStart() {
 		super.onStart();
-		PhotoViewFragment viewer = (PhotoViewFragment) getFragmentManager()
-				.findFragmentById(R.id.photo);
-		MapViewFragment mapViewer = (MapViewFragment) getFragmentManager()
-				.findFragmentById(R.id.mapview);
-		
+		photoFragment = (PhotoViewFragment) getFragmentManager()
+				.findFragmentById(R.id.photo_fragment);
+		mapFragment = (MapViewFragment) getFragmentManager()
+				.findFragmentById(R.id.mapview_fragment);
+		for(PhotoInfo photo : info) {
+			photoFragment.updateImage(photo.getLocation());
+			mapFragment.updateMapPosition(photo.getLatitude(), photo.getLongitude());
+			try {
+				wait(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

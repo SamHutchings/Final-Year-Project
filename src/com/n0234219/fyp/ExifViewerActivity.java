@@ -13,7 +13,7 @@ public class ExifViewerActivity extends Activity implements ThumbnailViewFragmen
 		setContentView(R.layout.exif_viewer);        
 	}
 
-	public void onImageSelected(String lat, String lng) {
+	public void onImageSelected(Double lat, Double lng) {
 		MapViewFragment viewer = (MapViewFragment) getFragmentManager()
 				.findFragmentById(R.id.mapview_fragment);
 

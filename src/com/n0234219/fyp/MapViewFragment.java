@@ -54,23 +54,11 @@ public class MapViewFragment extends LocalActivityManagerFragment {
 		mapView.getOverlays().clear();
 	}
 
-	public void updateMapPosition(String latitude, String longitude) {
+	public void updateMapPosition(Double latitude, Double longitude) {
 
-		double lat;
-		double lng;
-		try {
-			lat = Double.valueOf(latitude);
-			lng = Double.valueOf(longitude);
-		} catch (NumberFormatException ex) {
-			ex.printStackTrace();
-			return;
-		} catch (NullPointerException ex) {
-			ex.printStackTrace();
-			return;
-		}
-		GeoPoint p = new GeoPoint((int) (lat * microDegrees), (int)(lng * microDegrees));
+		GeoPoint p = new GeoPoint((int) (latitude * microDegrees), (int)(longitude * microDegrees));
 		MapController mc = mapView.getController();
-		OverlayItem overlayitem = new OverlayItem(p, "Photo Location", "Latitude: " + lat + " \nLongitude: " + lng);
+		OverlayItem overlayitem = new OverlayItem(p, "Photo Location", "Latitude: " + latitude + " \nLongitude: " + longitude);
 		Drawable drawable = this.getResources().getDrawable(R.drawable.mapspointer);
 		MapOverlay itemizedoverlay = new MapOverlay(drawable, this.getActivity());
 		itemizedoverlay.addOverlay(overlayitem);
