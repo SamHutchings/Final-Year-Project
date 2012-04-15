@@ -25,6 +25,9 @@ public class GalleryActivity extends Activity implements LoaderManager.LoaderCal
 
 	private static final int PHOTO_LIST_LOADER = 0x01;
 	private GridView gridView;
+	private Bitmap[] thumbs;
+	private String[] paths;
+	private Integer[] ids;
 	private ImageCursorAdapter adapter;
 	private Cursor c;
 
@@ -52,25 +55,24 @@ public class GalleryActivity extends Activity implements LoaderManager.LoaderCal
 	}
 
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+		
+		thumbs = new Bitmap[cursor.getCount()];
+		paths = new String[cursor.getCount()];
+		int id;
+		for(int i = 0; i < cursor.getCount(); i++) {
+			cursor.moveToPosition(i);
+			id = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID));
+			thumbs[i] = MediaStore.Images.Thumbnails.getThumbnail(getApplicationContext().getContentResolver(),
+					id, MediaStore.Images.Thumbnails.MICRO_KIND, null);
+			paths[i] = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA));
+		}
 		adapter.swapCursor(cursor);
-
 	}
 
 	public void onLoaderReset(Loader<Cursor> loader) {
 		adapter.swapCursor(null);
 
 	}
-
-	private class GetThumbnailTask extends AsyncTask<Long, Integer, Bitmap> {
-
-		@Override
-		protected Bitmap doInBackground(Long... params) {
-			return MediaStore.Images.Thumbnails.getThumbnail(getApplicationContext().getContentResolver(),
-					params[0], MediaStore.Images.Thumbnails.MICRO_KIND, null);
-		}
-		
-	}
-
 
 
 
@@ -86,15 +88,7 @@ public class GalleryActivity extends Activity implements LoaderManager.LoaderCal
 		@Override
 		public void bindView(View view, Context context, Cursor cursor) {
 			ImageView iv = (ImageView) view.findViewById(R.id.photo_thumb);
-			long id = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID));
-			AsyncTask<Long, Integer, Bitmap> task = new GetThumbnailTask().execute(id);
-			try {
-				iv.setImageBitmap(task.get());
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} catch (ExecutionException e) {
-				e.printStackTrace();
-			}
+			iv.setImageBitmap(thumbs[cursor.getPosition()]);
 		}
 
 		@Override
