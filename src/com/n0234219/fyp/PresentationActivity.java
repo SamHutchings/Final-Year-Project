@@ -31,14 +31,17 @@ public class PresentationActivity extends Activity {
 				.findFragmentById(R.id.photo_fragment);
 		mapFragment = (MapViewFragment) getFragmentManager()
 				.findFragmentById(R.id.mapview_fragment);
+		runPresentation();
+		
+	}
+	
+	
+	
+	public void runPresentation() {
 		for(PhotoInfo photo : info) {
 			photoFragment.updateImage(photo.getLocation());
 			mapFragment.updateMapPosition(photo.getLatitude(), photo.getLongitude());
-			try {
-				wait(2000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 		}
+	
 	}
 }

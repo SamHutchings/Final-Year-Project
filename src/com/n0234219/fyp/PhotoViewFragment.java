@@ -1,5 +1,8 @@
 package com.n0234219.fyp;
 
+import com.n0234219.fyp.ThumbnailViewFragment.OnImageSelectedListener;
+
+import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,10 +21,20 @@ public class PhotoViewFragment extends Fragment {
         return inflater.inflate(R.layout.photo_view, container, false);
     }
 	
+
 	public void updateImage(String filePath) {
+		if(null != bm) {
+			bm.recycle();
+		}
 		ImageView image = (ImageView) getView();
 		bm = BitmapFactory.decodeFile(filePath);
 		image.setImageBitmap(bm);
 				
 	}
+	
+	@Override
+    public void onStop() {
+		super.onStop();
+		bm.recycle();
+    }
 }
