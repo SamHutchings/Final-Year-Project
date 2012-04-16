@@ -59,7 +59,9 @@ public class GalleryActivity extends Activity implements LoaderManager.LoaderCal
 	}
 
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		String[] projection = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};
+		String[] projection = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID, 
+				MediaStore.Images.ImageColumns.LATITUDE, MediaStore.Images.ImageColumns.LONGITUDE, 
+				MediaStore.Images.ImageColumns.DATE_TAKEN};
 		CursorLoader cursorLoader = new CursorLoader(this,
 				MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection,
 				 MediaStore.Images.Media.DATA + " like ? ",
@@ -77,20 +79,13 @@ public class GalleryActivity extends Activity implements LoaderManager.LoaderCal
 			
 			cursor.moveToPosition(i);
 			id = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID));
-			String projection[] = {MediaStore.Images.ImageColumns.LATITUDE, MediaStore.Images.ImageColumns.LONGITUDE,
-					MediaStore.Images.ImageColumns.DATE_TAKEN};
-			Cursor imageCursor = getContentResolver().query(
-					Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-							String.valueOf(id)), projection, null, null, null);
-			imageCursor.moveToPosition(0);
 			thumbs[i] = MediaStore.Images.Thumbnails.getThumbnail(getApplicationContext().getContentResolver(),
 					id, MediaStore.Images.Thumbnails.MICRO_KIND, null);
 			info[i] = new PhotoInfo();
-			info[i].setLatitude(imageCursor.getDouble(imageCursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.LATITUDE)));
-			info[i].setLongitude(imageCursor.getDouble(imageCursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.LONGITUDE)));
-			info[i].setTimeTaken(imageCursor.getLong(imageCursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATE_TAKEN)));
+			info[i].setLatitude(cursor.getDouble(cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.LATITUDE)));
+			info[i].setLongitude(cursor.getDouble(cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.LONGITUDE)));
+			info[i].setTimeTaken(cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATE_TAKEN)));
 			info[i].setLocation(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)));
-			imageCursor.close();
 		}
 		selectButton.setOnClickListener(new OnClickListener() {
 

@@ -27,6 +27,7 @@ public class ThumbnailViewFragment extends Fragment implements LoaderManager.Loa
 	 // member variables for
     private static final int PHOTO_LIST_LOADER = 0x01;
     private GridView gridView;
+    private Bitmap[] thumbs;
     private ImageCursorAdapter adapter;
     private OnImageSelectedListener imageSelectionListener;
     private Cursor c;
@@ -89,9 +90,18 @@ public class ThumbnailViewFragment extends Fragment implements LoaderManager.Loa
 			        new String[] {"%Camera%"}, null);
 		return cursorLoader;
     }
+    
 
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        adapter.swapCursor(cursor);
+    	thumbs = new Bitmap[cursor.getCount()];
+    	int id;
+    	for(int i = 0; i < cursor.getCount(); i++) {
+    		cursor.moveToPosition(i);
+    		id = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID));
+    		thumbs[i] = MediaStore.Images.Thumbnails.getThumbnail(getActivity().getApplicationContext().getContentResolver(),
+    				id, MediaStore.Images.Thumbnails.MICRO_KIND, null);
+    	}
+    		adapter.swapCursor(cursor);
 
     }
 
@@ -100,15 +110,7 @@ public class ThumbnailViewFragment extends Fragment implements LoaderManager.Loa
     }
     
     
-    private class GetThumbnailTask extends AsyncTask<Long, Integer, Bitmap> {
-
-		@Override
-		protected Bitmap doInBackground(Long... params) {
-			return MediaStore.Images.Thumbnails.getThumbnail(getActivity().getApplicationContext().getContentResolver(),
-					params[0], MediaStore.Images.Thumbnails.MICRO_KIND, null);
-		}
-		
-	}
+    
     
 
     private class ImageCursorAdapter extends CursorAdapter {
@@ -123,15 +125,7 @@ public class ThumbnailViewFragment extends Fragment implements LoaderManager.Loa
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
             ImageView iv = (ImageView) view;
-			long id = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID));
-			AsyncTask<Long, Integer, Bitmap> task = new GetThumbnailTask().execute(id);
-			try {
-				iv.setImageBitmap(task.get());
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} catch (ExecutionException e) {
-				e.printStackTrace();
-			}
+			iv.setImageBitmap(thumbs[cursor.getPosition()]);
         }
 
         @Override
