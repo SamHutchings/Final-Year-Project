@@ -53,7 +53,6 @@ public class PhotoInfo implements Parcelable {
 		dest.writeLong(timeTaken);	
 	}
 	
-	   // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
     public static final Parcelable.Creator<PhotoInfo> CREATOR = new Parcelable.Creator<PhotoInfo>() {
         public PhotoInfo createFromParcel(Parcel in) {
             return new PhotoInfo(in);
@@ -64,7 +63,6 @@ public class PhotoInfo implements Parcelable {
         }
     };
 
-    // example constructor that takes a Parcel and gives you an object populated with it's values
     private PhotoInfo(Parcel in) {
         latitude = in.readDouble();
         longitude = in.readDouble();

@@ -90,7 +90,6 @@ public class GalleryActivity extends Activity implements LoaderManager.LoaderCal
 		selectButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				final int len = selected.length;
 				
 				List<PhotoInfo> selectedInfo = new ArrayList<PhotoInfo>();
@@ -142,7 +141,6 @@ public class GalleryActivity extends Activity implements LoaderManager.LoaderCal
 			cb.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
 					CheckBox cb = (CheckBox) v;
 					int id = cb.getId();
 					if (selected[id]){
