@@ -8,6 +8,9 @@
 package com.n0234219.fyp;
 
 public final class R {
+    public static final class anim {
+        public static final int fade_animation=0x7f040000;
+    }
     public static final class attr {
     }
     public static final class drawable {
@@ -16,22 +19,22 @@ public final class R {
         public static final int mapspointer=0x7f020002;
     }
     public static final class id {
-        public static final int exif=0x7f050007;
-        public static final int filechoice=0x7f05000c;
-        public static final int filechoicetext=0x7f05000d;
-        public static final int gallery=0x7f050005;
-        public static final int mapview=0x7f050009;
-        public static final int mapview_fragment=0x7f050001;
-        public static final int photo=0x7f05000a;
-        public static final int photo_fragment=0x7f05000b;
-        public static final int photo_item=0x7f05000f;
-        public static final int photo_thumb=0x7f050002;
-        public static final int preferences=0x7f050008;
-        public static final int presentation=0x7f050006;
-        public static final int select_button=0x7f050004;
-        public static final int selection_box=0x7f050003;
-        public static final int startpresentation=0x7f05000e;
-        public static final int thumbnail_fragment=0x7f050000;
+        public static final int exif=0x7f060007;
+        public static final int filechoice=0x7f06000c;
+        public static final int filechoicetext=0x7f06000d;
+        public static final int gallery=0x7f060005;
+        public static final int mapview=0x7f060009;
+        public static final int mapview_fragment=0x7f060001;
+        public static final int photo=0x7f06000a;
+        public static final int photo_fragment=0x7f06000b;
+        public static final int photo_item=0x7f06000f;
+        public static final int photo_thumb=0x7f060002;
+        public static final int preferences=0x7f060008;
+        public static final int presentation=0x7f060006;
+        public static final int select_button=0x7f060004;
+        public static final int selection_box=0x7f060003;
+        public static final int startpresentation=0x7f06000e;
+        public static final int thumbnail_fragment=0x7f060000;
     }
     public static final class layout {
         public static final int exif_viewer=0x7f030000;
@@ -48,13 +51,13 @@ public final class R {
         public static final int thumbnail_view=0x7f03000b;
     }
     public static final class string {
-        public static final int app_name=0x7f040000;
-        public static final int exif_button=0x7f040002;
-        public static final int file_choice_button=0x7f040004;
-        public static final int file_choice_label=0x7f040006;
-        public static final int options_button=0x7f040003;
-        public static final int presentation_button=0x7f040001;
-        public static final int select_button=0x7f040007;
-        public static final int start_presentation_button=0x7f040005;
+        public static final int app_name=0x7f050000;
+        public static final int exif_button=0x7f050002;
+        public static final int file_choice_button=0x7f050004;
+        public static final int file_choice_label=0x7f050006;
+        public static final int options_button=0x7f050003;
+        public static final int presentation_button=0x7f050001;
+        public static final int select_button=0x7f050007;
+        public static final int start_presentation_button=0x7f050005;
     }
 }
