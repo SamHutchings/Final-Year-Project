@@ -7,6 +7,8 @@ import java.util.TimerTask;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.animation.Animation;
@@ -20,6 +22,7 @@ public class PresentationActivity extends Activity {
 	private PhotoViewFragment photoFragment;
 	private int position = 0;
 	private ImageView iv;
+	private Bitmap bm;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,8 @@ public class PresentationActivity extends Activity {
 		super.onStart();
 		final Handler animHandler = new Handler();
 		mapFragment = (MapViewFragment) getFragmentManager().findFragmentById(R.id.mapview_fragment);
+		photoFragment = (PhotoViewFragment) getFragmentManager().findFragmentById(R.id.photo_fragment);
+		iv = (ImageView) photoFragment.getView();
 		final Runnable mUpdateResults = new Runnable() {
             public void run() {
  
@@ -44,9 +49,8 @@ public class PresentationActivity extends Activity {
             }
         };
  
-        int delay = 1000; // delay for 1 sec.
- 
-        int period = 8000; // repeat every 4 sec.
+        int delay = 1000;
+        int period = 8000; 
  
         Timer timer = new Timer();
  
@@ -62,13 +66,24 @@ public class PresentationActivity extends Activity {
 
 	}
 	
+	public void onStop() {
+		super.onStop();
+		bm.recycle();
+	}
+	
+	
 	public void runPresentation() {
+		if(position >= info.size()) {
+			finish();
+		}
 		PhotoInfo photo = info.get(position);
-		iv = (ImageView) findViewById(R.id.photo);
+		bm = BitmapFactory.decodeFile(photo.getLocation());
 		iv.setImageBitmap(bm);
-		position++;
-		Animation rotateimage = AnimationUtils.loadAnimation(this, R.anim.custom_anim);
 		mapFragment.updateMapPosition(photo.getLatitude(), photo.getLongitude());
+		position++;
+		Animation fadeAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_animation);
+		iv.startAnimation(fadeAnimation);
+		
 		
 	
 	}
