@@ -23,6 +23,7 @@ public class PresentationActivity extends Activity {
 	private int position = 0;
 	private ImageView iv;
 	private Bitmap bm;
+	private TimerTask presentationTask;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,22 +54,24 @@ public class PresentationActivity extends Activity {
         int period = 8000; 
  
         Timer timer = new Timer();
+        presentationTask = new TimerTask() {
+        	 
+            public void run() {
+     
+                 animHandler.post(mUpdateResults);
+     
+            }
+        };
+     
  
-        timer.scheduleAtFixedRate(new TimerTask() {
- 
-        public void run() {
- 
-             animHandler.post(mUpdateResults);
- 
-        }
- 
-        }, delay, period);
+        timer.scheduleAtFixedRate(presentationTask, delay, period);
 
 	}
 	
 	public void onStop() {
 		super.onStop();
 		bm.recycle();
+		presentationTask.cancel();
 	}
 	
 	
