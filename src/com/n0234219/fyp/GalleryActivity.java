@@ -21,11 +21,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CursorAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 
@@ -51,9 +53,8 @@ public class GalleryActivity extends Activity implements LoaderManager.LoaderCal
 
 	public void onStart() {
 		super.onStart();
-		adapter = new ImageCursorAdapter(getApplicationContext(), c, 0);
+		adapter = new ImageCursorAdapter();
 		gridView = (GridView) findViewById(R.id.gallery);
-		gridView.setAdapter(adapter);
 		selectButton = (Button) findViewById(R.id.select_button);
 		
 	}
@@ -74,6 +75,7 @@ public class GalleryActivity extends Activity implements LoaderManager.LoaderCal
 		thumbs = new Bitmap[cursor.getCount()];
 		info = new PhotoInfo[cursor.getCount()];
 		selected = new boolean[cursor.getCount()];
+		gridView.setAdapter(adapter);
 		int id;
 		for(int i = 0; i < cursor.getCount(); i++) {
 			
@@ -108,39 +110,51 @@ public class GalleryActivity extends Activity implements LoaderManager.LoaderCal
 				
 			}
 		});
-		adapter.swapCursor(cursor);
 	}
 
 	public void onLoaderReset(Loader<Cursor> loader) {
-		adapter.swapCursor(null);
-
 	}
 
 
+	public class ImageCursorAdapter extends BaseAdapter {
+		private LayoutInflater inflater;
 
-	private class ImageCursorAdapter extends CursorAdapter {
-
-		private Context mContext;
-
-		public ImageCursorAdapter(Context context, Cursor c, int flags) {
-			super(context, c);
-			mContext = context;
+		public ImageCursorAdapter() {
+			inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		}
 
-		@Override
-		public void bindView(View view, Context context, Cursor cursor) {
-			ImageView iv = (ImageView) view.findViewById(R.id.photo_thumb);
-			iv.setImageBitmap(thumbs[cursor.getPosition()]);
+		public int getCount() {
+			return thumbs.length;
 		}
 
-		@Override
-		public View newView(Context context, Cursor cursor, ViewGroup parent) {
-			View v = getLayoutInflater().inflate(R.layout.gallery_item, parent, false);
-			CheckBox cb = (CheckBox) v.findViewById(R.id.selection_box);
-			cb.setId(cursor.getPosition());
-			cb.setOnClickListener(new OnClickListener() {
+		public Object getItem(int position) {
+			return position;
+		}
+
+		public long getItemId(int position) {
+			return position;
+		}
+
+		public View getView(int position, View convertView, ViewGroup parent) {
+			ItemHolder holder;
+			if (convertView == null) {
+				holder = new ItemHolder();
+				convertView = inflater.inflate(
+						R.layout.gallery_item, null);
+				holder.iv = (ImageView) convertView.findViewById(R.id.photo_thumb);
+				holder.cb = (CheckBox) convertView.findViewById(R.id.selection_box);
+
+				convertView.setTag(holder);
+			}
+			else {
+				holder = (ItemHolder) convertView.getTag();
+			}
+			holder.cb.setId(position);
+			holder.iv.setId(position);
+			holder.cb.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View v) {
+					// TODO Auto-generated method stub
 					CheckBox cb = (CheckBox) v;
 					int id = cb.getId();
 					if (selected[id]){
@@ -152,9 +166,16 @@ public class GalleryActivity extends Activity implements LoaderManager.LoaderCal
 					}
 				}
 			});
-			return v;	        
+			holder.iv.setImageBitmap(thumbs[position]);
+			holder.cb.setChecked(selected[position]);
+			holder.id = position;
+			return convertView;
 		}
 	}
-
+	class ItemHolder {
+		ImageView iv;
+		CheckBox cb;
+		int id;
+	}	
 
 }
