@@ -22,10 +22,10 @@
         </activity>
         <activity android:name=".PresentationActivity" android:label="Presentation" android:screenOrientation="landscape" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity android:name=".ExifViewerActivity" android:label="ExifViewer" android:screenOrientation="landscape" />
-        <activity android:name=".PreferencesMenuActivity" android:label="PreferencesMenu" android:screenOrientation="portrait" />
-        <activity android:name=".PresentationMenuActivity" android:label="Presentation" android:screenOrientation="portrait" />
-         <activity android:name=".MapViewActivity" android:label="MapView" android:screenOrientation="landscape" />
-         <activity android:name=".GalleryActivity" android:label="Gallery" android:screenOrientation="portrait" />
+        <activity android:name=".PreferencesMenuActivity" android:label="PreferencesMenu" />
+        <activity android:name=".PresentationMenuActivity" android:label="Presentation" />
+         <activity android:name=".MapViewActivity" android:label="MapView" />
+         <activity android:name=".GalleryActivity" android:label="Gallery" />
         
         
     </application>
