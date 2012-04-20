@@ -65,19 +65,4 @@ public class PresentationMenuActivity extends Activity {
 		}
 	}
 	
-	  public PhotoInfo setPhotoInfo(Uri contentUri) {
-	        String [] proj      = {MediaStore.Images.Media.DATA, MediaStore.Images.Media.LATITUDE,
-	        		MediaStore.Images.Media.LONGITUDE, MediaStore.Images.Media.DATE_TAKEN};
-	        Cursor cursor       = managedQuery( contentUri, proj, null, null,null);
-	        PhotoInfo newInfo = new PhotoInfo();
-	        if (cursor == null) return null;
-	        cursor.moveToFirst();
-	 
-	        newInfo.setLocation(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)));
-	        newInfo.setLatitude(cursor.getDouble(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.LATITUDE)));
-	        newInfo.setLongitude(cursor.getDouble(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.LONGITUDE)));
-	        newInfo.setTimeTaken(cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATE_TAKEN)));
-	 
-	        return newInfo;
-	    }
 }
