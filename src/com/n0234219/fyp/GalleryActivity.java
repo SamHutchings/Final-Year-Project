@@ -65,7 +65,7 @@ public class GalleryActivity extends Activity implements LoaderManager.LoaderCal
 		CursorLoader cursorLoader = new CursorLoader(this,
 				MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection,
 				 MediaStore.Images.Media.DATA + " like ? ",
-			        new String[] {"%Camera%"}, null);
+			        new String[] {"%Camera%"}, MediaStore.Images.ImageColumns.DATE_TAKEN + " desc");
 		return cursorLoader;
 	}
 
