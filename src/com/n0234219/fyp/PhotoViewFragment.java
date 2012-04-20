@@ -35,6 +35,8 @@ public class PhotoViewFragment extends Fragment {
 	@Override
     public void onStop() {
 		super.onStop();
-		bm.recycle();
+		if(null != bm) {
+			bm.recycle();
+		}
     }
 }

@@ -73,16 +73,18 @@ public class PresentationActivity extends Activity {
 	
 	
 	public void runPresentation() {
-		if(position >= info.size()) {
+		if(position < info.size()) {
+			PhotoInfo photo = info.get(position);
+			bm = BitmapFactory.decodeFile(photo.getLocation());
+			iv.setImageBitmap(bm);
+			mapFragment.updateMapPosition(photo.getLatitude(), photo.getLongitude());
+			position++;
+			Animation fadeAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_animation);
+			iv.startAnimation(fadeAnimation);
+		} else {
 			finish();
 		}
-		PhotoInfo photo = info.get(position);
-		bm = BitmapFactory.decodeFile(photo.getLocation());
-		iv.setImageBitmap(bm);
-		mapFragment.updateMapPosition(photo.getLatitude(), photo.getLongitude());
-		position++;
-		Animation fadeAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_animation);
-		iv.startAnimation(fadeAnimation);
+		
 		
 		
 	
