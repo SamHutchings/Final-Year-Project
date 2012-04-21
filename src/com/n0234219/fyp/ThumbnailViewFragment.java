@@ -1,7 +1,5 @@
 package com.n0234219.fyp;
 
-import java.util.concurrent.ExecutionException;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
@@ -11,7 +9,6 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;

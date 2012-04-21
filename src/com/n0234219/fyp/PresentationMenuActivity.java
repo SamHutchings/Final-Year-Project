@@ -5,21 +5,15 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.provider.MediaStore;
-import android.provider.MediaStore.Images.Media;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class PresentationMenuActivity extends Activity {
 
-	private ArrayList<Uri> selectedImages;
 	private TextView fileChoiceText;
-	private Uri mImageCaptureUri = null;
 	private List<PhotoInfo> info;
 	private static final int PICK_FROM_FILE = 1;
 	

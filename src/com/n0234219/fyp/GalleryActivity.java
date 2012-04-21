@@ -2,7 +2,6 @@ package com.n0234219.fyp;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
 import android.app.LoaderManager;
@@ -12,8 +11,6 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.MediaStore;
@@ -24,11 +21,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CursorAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 
 public class GalleryActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -40,7 +34,6 @@ public class GalleryActivity extends Activity implements LoaderManager.LoaderCal
 	private PhotoInfo[] info;
 	private boolean[] selected;
 	private ImageCursorAdapter adapter;
-	private Cursor c;
 	private Button selectButton;
 
 
@@ -154,7 +147,6 @@ public class GalleryActivity extends Activity implements LoaderManager.LoaderCal
 			holder.cb.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
 					CheckBox cb = (CheckBox) v;
 					int id = cb.getId();
 					if (selected[id]){

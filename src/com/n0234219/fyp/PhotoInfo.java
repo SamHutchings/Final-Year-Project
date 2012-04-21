@@ -2,7 +2,6 @@ package com.n0234219.fyp;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.text.format.Time;
 
 public class PhotoInfo implements Parcelable {
 	private Double latitude;

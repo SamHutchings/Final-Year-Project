@@ -1,8 +1,5 @@
 package com.n0234219.fyp;
 
-import com.n0234219.fyp.ThumbnailViewFragment.OnImageSelectedListener;
-
-import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
