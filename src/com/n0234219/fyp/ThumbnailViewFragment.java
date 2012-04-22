@@ -44,7 +44,7 @@ public class ThumbnailViewFragment extends Fragment implements LoaderManager.Loa
     public void onStart() {
     	super.onStart();
     	adapter = new ImageCursorAdapter(getActivity().getApplicationContext(), c, 0);
-    	gridView = (GridView) getView();
+    	gridView = (GridView) getActivity().findViewById(R.id.photo_item);
     	gridView.setOnItemClickListener(new OnItemClickListener() {
 
     		public void onItemClick(AdapterView<?> parent, View view, int position,
