@@ -2,7 +2,6 @@ package com.n0234219.fyp;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.app.Activity;
 import android.content.Intent;
 
 
