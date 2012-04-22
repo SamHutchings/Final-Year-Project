@@ -39,8 +39,8 @@ public class PresentationActivity extends FragmentActivity {
 		super.onStart();
 		final Handler animHandler = new Handler();
 		mapFragment = (MapViewFragment) getSupportFragmentManager().findFragmentById(R.id.mapview_fragment);
-		photoFragment = (PhotoViewFragment) getFragmentManager().findFragmentById(R.id.photo_fragment);
-		iv = (ImageView) photoFragment.getView();
+		photoFragment = (PhotoViewFragment) getSupportFragmentManager().findFragmentById(R.id.photo_fragment);
+		iv = (ImageView) findViewById(R.id.photo);
 		final Runnable mUpdateResults = new Runnable() {
             public void run() {
  
