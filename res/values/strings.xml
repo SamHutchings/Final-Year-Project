@@ -10,5 +10,6 @@
     <string name="start_presentation_button">Start Presentation</string>
     <string name="file_choice_label">No files currently selected</string>
     <string name="select_button">Confirm</string>
+    <string name="preferences_string">Delay in presentation (seconds) </string>
 
 </resources>
