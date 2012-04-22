@@ -1,11 +1,12 @@
 package com.n0234219.fyp;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.app.Activity;
 import android.content.Intent;
 
 
-public class ExifViewerActivity extends Activity implements ThumbnailViewFragment.OnImageSelectedListener {
+public class ExifViewerActivity extends FragmentActivity implements ThumbnailViewFragment.OnImageSelectedListener {
 	
 	@Override    
 	protected void onCreate(Bundle bundle) {        
@@ -14,7 +15,7 @@ public class ExifViewerActivity extends Activity implements ThumbnailViewFragmen
 	}
 
 	public void onImageSelected(Double lat, Double lng) {
-		MapViewFragment viewer = (MapViewFragment) getFragmentManager()
+		MapViewFragment viewer = (MapViewFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.mapview_fragment);
 
 		if (viewer == null || !viewer.isInLayout()) {

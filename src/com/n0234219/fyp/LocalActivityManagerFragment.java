@@ -1,6 +1,6 @@
 package com.n0234219.fyp;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.app.LocalActivityManager;
 import android.os.Bundle;
 

@@ -9,11 +9,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.FragmentActivity;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-public class PresentationActivity extends Activity {
+public class PresentationActivity extends FragmentActivity {
 
 	private List<PhotoInfo> info;
 	private MapViewFragment mapFragment;
@@ -37,7 +38,7 @@ public class PresentationActivity extends Activity {
 	public void onStart() {
 		super.onStart();
 		final Handler animHandler = new Handler();
-		mapFragment = (MapViewFragment) getFragmentManager().findFragmentById(R.id.mapview_fragment);
+		mapFragment = (MapViewFragment) getSupportFragmentManager().findFragmentById(R.id.mapview_fragment);
 		photoFragment = (PhotoViewFragment) getFragmentManager().findFragmentById(R.id.photo_fragment);
 		iv = (ImageView) photoFragment.getView();
 		final Runnable mUpdateResults = new Runnable() {
