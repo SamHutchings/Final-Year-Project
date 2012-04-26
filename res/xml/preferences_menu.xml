@@ -3,6 +3,7 @@
    
    <EditTextPreference
                 android:key="delay_preference"
+                android:defaultValue="3"
                 android:title="@string/preferences_string"
                 android:summary="@string/preferences_summary"
                 android:dialogTitle="@string/preferences_string" />
