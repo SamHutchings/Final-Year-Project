@@ -10,7 +10,6 @@ public class PreferencesMenuActivity extends PreferenceActivity {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.preferences_menu);
-	
+		addPreferencesFromResource(R.xml.preferences_menu);
 	}
 }
