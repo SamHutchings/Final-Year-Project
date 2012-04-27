@@ -35,7 +35,7 @@ public class PresentationActivity extends FragmentActivity {
 		setContentView(R.layout.presentation);
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		try {
-			int delay = Integer.parseInt(prefs.getString("delay_preference", "4"));
+			delay = Integer.parseInt(prefs.getString("delay_preference", "4"));
 			delay = delay*1000;
 		} catch (NumberFormatException ex) {
 			Toast.makeText(getApplicationContext(), "Delay preference value invalid. Delay set to 4 seconds.", Toast.LENGTH_SHORT).show();
