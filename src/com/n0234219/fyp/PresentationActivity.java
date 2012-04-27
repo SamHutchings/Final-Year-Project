@@ -88,6 +88,13 @@ public class PresentationActivity extends FragmentActivity {
 	public void runPresentation() {
 		if(position < info.size()) {
 			PhotoInfo photo = info.get(position);
+			BitmapFactory.Options options = new BitmapFactory.Options();
+			options.inJustDecodeBounds = true;
+			BitmapFactory.decodeFile(photo.getLocation(), options);
+			int imageHeight = options.outHeight;
+			int imageWidth = options.outWidth;
+			
+			
 			bm = BitmapFactory.decodeFile(photo.getLocation());
 			iv.setImageBitmap(bm);
 			mapFragment.updateMapPosition(photo.getLatitude(), photo.getLongitude());

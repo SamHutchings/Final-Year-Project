@@ -38,17 +38,18 @@ public final class R {
     }
     public static final class layout {
         public static final int exif_viewer=0x7f030000;
-        public static final int gallery_item=0x7f030001;
-        public static final int gallery_view=0x7f030002;
-        public static final int mainmenu=0x7f030003;
-        public static final int map_view=0x7f030004;
-        public static final int mapview_fragment=0x7f030005;
-        public static final int photo_fragment=0x7f030006;
-        public static final int photo_view=0x7f030007;
-        public static final int presentation=0x7f030008;
-        public static final int presentation_menu=0x7f030009;
-        public static final int thumbnail_fragment=0x7f03000a;
-        public static final int thumbnail_view=0x7f03000b;
+        public static final int gallery_fragment=0x7f030001;
+        public static final int gallery_item=0x7f030002;
+        public static final int gallery_view=0x7f030003;
+        public static final int mainmenu=0x7f030004;
+        public static final int map_view=0x7f030005;
+        public static final int mapview_fragment=0x7f030006;
+        public static final int photo_fragment=0x7f030007;
+        public static final int photo_view=0x7f030008;
+        public static final int presentation=0x7f030009;
+        public static final int presentation_menu=0x7f03000a;
+        public static final int thumbnail_fragment=0x7f03000b;
+        public static final int thumbnail_view=0x7f03000c;
     }
     public static final class string {
         public static final int app_name=0x7f060000;
