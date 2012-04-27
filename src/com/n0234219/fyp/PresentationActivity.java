@@ -5,14 +5,17 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class PresentationActivity extends FragmentActivity {
 
@@ -20,6 +23,8 @@ public class PresentationActivity extends FragmentActivity {
 	private MapViewFragment mapFragment;
 	private PhotoViewFragment photoFragment;
 	private int position = 0;
+	private int delay;
+	private int startDelay;
 	private ImageView iv;
 	private Bitmap bm;
 	private TimerTask presentationTask;
@@ -28,7 +33,15 @@ public class PresentationActivity extends FragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.presentation);
-		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		try {
+			int delay = Integer.parseInt(prefs.getString("delay_preference", "4"));
+			delay = delay*1000;
+		} catch (NumberFormatException ex) {
+			Toast.makeText(getApplicationContext(), "Delay preference value invalid. Delay set to 4 seconds.", Toast.LENGTH_SHORT).show();
+			delay = 4000;
+		}
+		startDelay = 1000;
 		Bundle extras = getIntent().getExtras();
 		info = extras.getParcelableArrayList("Info");
 		
@@ -48,9 +61,7 @@ public class PresentationActivity extends FragmentActivity {
  
             }
         };
- 
-        int delay = 1000;
-        int period = 8000; 
+        
  
         Timer timer = new Timer();
         presentationTask = new TimerTask() {
@@ -63,7 +74,7 @@ public class PresentationActivity extends FragmentActivity {
         };
      
  
-        timer.scheduleAtFixedRate(presentationTask, delay, period);
+        timer.scheduleAtFixedRate(presentationTask, startDelay, delay);
 
 	}
 	
