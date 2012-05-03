@@ -91,9 +91,15 @@ public class GalleryFragment extends Fragment implements LoaderManager.LoaderCal
 		selectAllButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				//for(ItemHolder holder : viewHolder) {
+				for(int i = 0; i < selected.length; i++) {
+					ItemHolder ih = viewHolder.get(i);
 					
-				
+					if(null != ih) {
+						CheckBox cb = ih.cb;
+						selected[i] = true;
+						cb.setSelected(true);
+					}
+				}
 			}
 			
 			
