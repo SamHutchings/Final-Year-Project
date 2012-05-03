@@ -1,6 +1,7 @@
 package com.n0234219.fyp;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import android.app.Activity;
 import android.content.Context;
@@ -29,8 +30,10 @@ public class GalleryFragment extends Fragment implements LoaderManager.LoaderCal
 	private Bitmap[] thumbs;
 	private PhotoInfo[] info;
 	private boolean[] selected;
+	private HashMap<Integer, ItemHolder> viewHolder;
 	private ImageCursorAdapter adapter;
 	private Button selectButton;
+	private Button selectAllButton;
 	private GallerySelectionInterface gallerySelectionInterface;
 
 	
@@ -41,6 +44,7 @@ public class GalleryFragment extends Fragment implements LoaderManager.LoaderCal
     
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		viewHolder = new HashMap<Integer, ItemHolder>();
 		getLoaderManager().initLoader(PHOTO_LIST_LOADER, null, this);
 		
 	}
@@ -50,6 +54,7 @@ public class GalleryFragment extends Fragment implements LoaderManager.LoaderCal
 		adapter = new ImageCursorAdapter();
 		gridView = (GridView) getActivity().findViewById(R.id.gallery);
 		selectButton = (Button) getActivity().findViewById(R.id.select_button);
+		selectAllButton = (Button) getActivity().findViewById(R.id.select_all_button);
 		
 	}
 
@@ -83,6 +88,17 @@ public class GalleryFragment extends Fragment implements LoaderManager.LoaderCal
 			info[i].setTimeTaken(cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATE_TAKEN)));
 			info[i].setLocation(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)));
 		}
+		selectAllButton.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View v) {
+				//for(ItemHolder holder : viewHolder) {
+					
+				
+			}
+			
+			
+			
+		});
 		selectButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
@@ -155,6 +171,22 @@ public class GalleryFragment extends Fragment implements LoaderManager.LoaderCal
 			}
 			holder.cb.setId(position);
 			holder.iv.setId(position);
+			viewHolder.put(position, holder);
+			holder.iv.setOnClickListener(new OnClickListener() {
+
+				public void onClick(View v) {
+					CheckBox cb = viewHolder.get(v.getId()).cb;
+					int id = cb.getId();			
+					if (selected[id]){
+						cb.setChecked(false);
+						selected[id] = false;
+					} else {
+						cb.setChecked(true);
+						selected[id] = true;
+					}
+				}
+			});
+			
 			holder.cb.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View v) {

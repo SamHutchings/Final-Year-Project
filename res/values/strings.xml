@@ -12,5 +12,6 @@
     <string name="select_button">Confirm</string>
     <string name="preferences_string">Delay in presentation (seconds) </string>
     <string name="preferences_summary">Delay in seconds</string>
+    <string name="select_all_button">Select all</string>
 
 </resources>

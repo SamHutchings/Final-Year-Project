@@ -33,8 +33,7 @@ public class MapViewFragment extends LocalActivityManagerFragment {
 		mTabHost = (TabHost) view.findViewById(android.R.id.tabhost);
 		mapView = (MapView) view.findViewById(R.id.mapview);
 		mTabHost.setup(getLocalActivityManager());
-		mc = mapView.getController();
-		mc.setZoom(17);
+		
 		TabSpec tab = mTabHost.newTabSpec("map").setIndicator("map").setContent(new Intent(getActivity(), MapViewActivity.class));
 		mTabHost.addTab(tab);
 		mapView = (MapView) mTabHost.getCurrentView().findViewById(R.id.mapview);
@@ -48,6 +47,13 @@ public class MapViewFragment extends LocalActivityManagerFragment {
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 
+	}	
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		mc = mapView.getController();
+		mc.setZoom(17);
 	}
 
 	@Override

@@ -19,21 +19,23 @@ public final class R {
         public static final int mapspointer=0x7f020002;
     }
     public static final class id {
-        public static final int exif=0x7f070007;
-        public static final int filechoice=0x7f07000c;
-        public static final int filechoicetext=0x7f07000d;
-        public static final int gallery=0x7f070005;
-        public static final int mapview=0x7f070009;
+        public static final int button1=0x7f070007;
+        public static final int exif=0x7f070009;
+        public static final int filechoice=0x7f07000e;
+        public static final int filechoicetext=0x7f07000f;
+        public static final int gallery=0x7f070004;
+        public static final int mapview=0x7f07000b;
         public static final int mapview_fragment=0x7f070001;
-        public static final int photo=0x7f07000a;
-        public static final int photo_fragment=0x7f07000b;
-        public static final int photo_item=0x7f07000f;
+        public static final int photo=0x7f07000c;
+        public static final int photo_fragment=0x7f07000d;
+        public static final int photo_item=0x7f070011;
         public static final int photo_thumb=0x7f070002;
-        public static final int preferences=0x7f070008;
-        public static final int presentation=0x7f070006;
-        public static final int select_button=0x7f070004;
+        public static final int preferences=0x7f07000a;
+        public static final int presentation=0x7f070008;
+        public static final int select_all_button=0x7f070005;
+        public static final int select_button=0x7f070006;
         public static final int selection_box=0x7f070003;
-        public static final int startpresentation=0x7f07000e;
+        public static final int startpresentation=0x7f070010;
         public static final int thumbnail_fragment=0x7f070000;
     }
     public static final class layout {
@@ -60,6 +62,7 @@ public final class R {
         public static final int preferences_string=0x7f060008;
         public static final int preferences_summary=0x7f060009;
         public static final int presentation_button=0x7f060001;
+        public static final int select_all_button=0x7f06000a;
         public static final int select_button=0x7f060007;
         public static final int start_presentation_button=0x7f060005;
     }
