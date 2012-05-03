@@ -25,6 +25,7 @@ public class MapViewFragment extends LocalActivityManagerFragment {
 	private TabHost mTabHost;
 	private MapView mapView;
 	private List<Overlay> mapOverlays;
+	MapController mc;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,7 +33,8 @@ public class MapViewFragment extends LocalActivityManagerFragment {
 		mTabHost = (TabHost) view.findViewById(android.R.id.tabhost);
 		mapView = (MapView) view.findViewById(R.id.mapview);
 		mTabHost.setup(getLocalActivityManager());
-
+		mc = mapView.getController();
+		mc.setZoom(17);
 		TabSpec tab = mTabHost.newTabSpec("map").setIndicator("map").setContent(new Intent(getActivity(), MapViewActivity.class));
 		mTabHost.addTab(tab);
 		mapView = (MapView) mTabHost.getCurrentView().findViewById(R.id.mapview);
@@ -57,7 +59,6 @@ public class MapViewFragment extends LocalActivityManagerFragment {
 	public void updateMapPosition(Double latitude, Double longitude) {
 
 		GeoPoint p = new GeoPoint((int) (latitude * microDegrees), (int)(longitude * microDegrees));
-		MapController mc = mapView.getController();
 		OverlayItem overlayitem = new OverlayItem(p, "Photo Location", "Latitude: " + latitude + " \nLongitude: " + longitude);
 		Drawable drawable = this.getResources().getDrawable(R.drawable.mapspointer);
 		MapOverlay itemizedoverlay = new MapOverlay(drawable, this.getActivity());
@@ -65,7 +66,6 @@ public class MapViewFragment extends LocalActivityManagerFragment {
 		mapOverlays.clear();
 		mapOverlays.add(itemizedoverlay);
 		mc.animateTo(p);
-		mc.setZoom(17);
 		mapView.invalidate();
 
 	}
