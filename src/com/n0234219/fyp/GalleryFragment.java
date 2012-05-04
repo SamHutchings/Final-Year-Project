@@ -55,6 +55,8 @@ public class GalleryFragment extends Fragment implements LoaderManager.LoaderCal
 		gridView = (GridView) getActivity().findViewById(R.id.gallery);
 		selectButton = (Button) getActivity().findViewById(R.id.select_button);
 		selectAllButton = (Button) getActivity().findViewById(R.id.select_all_button);
+		selectAllButton.setVisibility(View.INVISIBLE);
+		selectAllButton.setEnabled(false);
 		
 	}
 
